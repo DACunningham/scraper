@@ -3,6 +3,15 @@
 # the cases listed below, they will then be tested against further unseen
 # cases before being reviewed manually.
 
+# Do not chance these dependencies
+import pytest
+
+# Import your dependencies here
+import requests
+import urllib.request
+import json
+from bs4 import BeautifulSoup
+
 
 def bbc_scraper(url):
     """
@@ -17,6 +26,38 @@ def bbc_scraper(url):
     several URLs in turn return the correct json object for each time it is
     invoked without any manual intervention)
     """
+
+    url = "https://www.bbc.co.uk/news/uk-52255054"
+    raw_response = requests.get(url)
+    page_html_obj = BeautifulSoup(raw_response.text, "html.parser")
+
+    title = page_html_obj.find("h1", {"class": "story-body__h1"}).text
+    date_published = (
+        page_html_obj.find("div", {"class": "story-body"})
+        .find("div", {"data-datetime": True})
+        .text
+    )
+    content_intro = (
+        page_html_obj.find("div", {"class": "story-body"})
+        .find("p", {"class": "story-body__introduction"})
+        .text
+    )
+    content_paragraphs = page_html_obj.find("div", {"class": "story-body"}).findAll(
+        "p", {"aria-hidden": False, "class": False}
+    )
+    content = content_intro
+    for para in content_paragraphs:
+        content += " " + para.text
+
+    result = {
+        "URL": url,
+        "Title": title,
+        "Date_published": date_published,
+        "Content": content,
+    }
+
+    results_json = json.dumps(result)
+    print(results_json)
 
     return results_json
 
