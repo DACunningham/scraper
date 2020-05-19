@@ -47,8 +47,9 @@ def bbc_scraper(url):
     )
     content = content_intro
     for para in content_paragraphs:
-        content += " " + para.text
+        content += "\n" + para.text
 
+    content += "\n"
     result = {
         "URL": url,
         "Title": title,
@@ -57,9 +58,9 @@ def bbc_scraper(url):
     }
 
     results_json = json.dumps(result)
-    print(results_json)
 
     return results_json
+    # return result
 
 
 def extract_entities(string):
@@ -70,7 +71,7 @@ def extract_entities(string):
     3) Organisations
     in the text string provided.
     """
-
+    entities_json = "None"
     return entities_json
 
 
