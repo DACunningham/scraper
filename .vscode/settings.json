@@ -1,0 +1,6 @@
+{
+    "python.pythonPath": "c:\\Users\\Dexter\\source\\repos\\scraper\\.env\\Scripts\\python.exe",
+    "python.linting.pylintEnabled": false,
+    "python.linting.pycodestyleEnabled": true,
+    "python.linting.enabled": true
+}
