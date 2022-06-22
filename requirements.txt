@@ -13,7 +13,7 @@ cymem==2.0.3
 idna==2.9
 more-itertools==8.3.0
 murmurhash==1.0.2
-numpy==1.18.4
+numpy==1.22.0
 packaging==20.4
 pathspec==0.8.0
 plac==1.1.3
